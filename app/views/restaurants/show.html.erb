@@ -1,0 +1,37 @@
+<div class="container d-flex justify-content-around">
+  <div class="info-container">
+    <div class="card" style="width: 18rem;">
+      <img src="https://source.unsplash.com/random" class="card-img-top" alt="restaurant photo">
+      <div class="card-body">
+        <h5 class="card-title text-center"><strong><%= @restaurant.name %></strong></h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Address : <%= @restaurant.address %></li>
+        <li class="list-group-item">Phone number : <%= @restaurant.phone_number %></li>
+        <li class="list-group-item">Category : <%= @restaurant.category %></li>
+      </ul>
+      <div class="card-body">
+        <h6 class="text-center"><strong>Reviews</strong></h6>
+        <% @restaurant.reviews.each do |review| %>
+          <li><%= review.content  %> | <%= review.rating %></li>
+        <% end %>
+      </div>
+    </div>
+    <!-- <h1><%= @restaurant.name %></h1>
+    <p>Address : <%= @restaurant.address %></p>
+    <p>Phone number : <%= @restaurant.phone_number %></p>
+    <p>Category : <%= @restaurant.category %></p>
+    <h4>Reviews</h4>
+    <% @restaurant.reviews.each do |review| %>
+      <li><%= review.content  %> | <%= review.rating %></li>
+    <% end %> -->
+  </div>
+  <div class="form-container w-50">
+  <h4>Add a Review</h4>
+    <%= simple_form_for([@restaurant, @review]) do |f| %>
+      <%= f.input :content %>
+      <%= f.input :rating, collection: Review::RATINGS %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>
